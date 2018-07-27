@@ -61,16 +61,20 @@ const expectedArray = [
   },
 ]
 
-function flattenRideshareArray(array) {
-  var newArray = array.map(function(element) {
-    // Add code here so that flattenRideshareArray will change
-    // initialArray into an array that is equal to expectedArray
-  })
+// Break it down in higher order functions for testability and reusability
+const rideMemberCount = (members) => members.length;
+const flattenRide = ({ rideShareId, members }) => ({ rideShareId, numberMembers: rideMemberCount(members) });
+const flattenRideshareArray = (array) => array.map(flattenRide);
 
-  return newArray
-}
+
 
 assert.deepEqual(expectedArray, flattenRideshareArray(initialArray), 'Arrays are not equal') || console.log('Success')
+
+const membersArray = [{ name: 'Chris', vehicleMake: 'Huffy' }, { name: 'Mike', vehicleMake: 'Ford' }]
+assert.equal(2, rideMemberCount(membersArray), 'Members count are incorrect') || console.log('Success')
+
+const unflattenRide = { rideShareId: 1, members: [{ name: 'Chris', vehicleMake: 'Huffy' }]};
+assert.deepEqual({ rideShareId: 1, numberMembers: 1 }, flattenRide(unflattenRide), 'Ride Flatten incorrectly') || console.log('Success')
 
 /*
 When run with "node 1_reshape_data.js" you should see the

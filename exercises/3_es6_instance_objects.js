@@ -7,6 +7,8 @@ class Minion {
   }
 }
 
+Minion.prototype.power = () => 9;
+
 const minions = [
   new Minion(),
   new Minion(),

@@ -1,3 +1,4 @@
+const assert = require('assert')
 // The wait function returns a promise that will resolve after
 // the specified number of seconds has passed
 const wait = function(seconds) {
@@ -14,6 +15,18 @@ to the console, waits 2 more seconds and then writes
 */
 
 
+const message = (number) => {
+	return `I waited ${number} ${number === 1 ? 'second' : 'seconds'}`
+}
+let secondsToWait = [1, 2];
+for(let seconds of secondsToWait){
+	if(seconds > 0) {
+		wait(seconds).then(() => console.log(message(seconds)));
+	}
+}
+
+assert.equal('I waited 1 second', message(1), 'Message is incorrect') || console.log('Success')
+assert.equal('I waited 2 seconds', message(2), 'Message is incorrect') || console.log('Success')
 
 /*
 You console output should look like the following AND wait the
