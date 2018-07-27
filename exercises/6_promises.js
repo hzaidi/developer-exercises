@@ -18,12 +18,29 @@ to the console, waits 2 more seconds and then writes
 const message = (number) => {
 	return `I waited ${number} ${number === 1 ? 'second' : 'seconds'}`
 }
+
+/* Both solution down if run independently will going to give same output */
+
+
+/*------------------------------------------------------*/
+wait(1)
+	.then(() => console.log(message(1)))
+	.then(() => wait(2))
+	.then(() => console.log(message(2)))
+
+/*------------------------------------------------------*/
+
+
+/*------------------------------------------------------*/
 let secondsToWait = [1, 2];
 for(let seconds of secondsToWait){
 	if(seconds > 0) {
 		wait(seconds).then(() => console.log(message(seconds)));
 	}
 }
+/*------------------------------------------------------*/
+
+
 
 assert.equal('I waited 1 second', message(1), 'Message is incorrect') || console.log('Success')
 assert.equal('I waited 2 seconds', message(2), 'Message is incorrect') || console.log('Success')
